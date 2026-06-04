@@ -6,24 +6,33 @@
 <title>FounderOS Mobile PWA v1.0</title>
 <style>
 :root{
-  --bg:#07111f;--panel:#0d1b2e;--panel2:#13263d;--ink:#eaf2ff;--muted:#8fa9c7;
-  --line:#24415f;--accent:#38bdf8;--accent2:#7dd3fc;--good:#34d399;--warn:#fbbf24;--bad:#fb7185;
-  --shadow:0 12px 30px rgba(0,0,0,.35);--radius:18px;
+  --bg:#07111f;--bg-rgb:7,17,31;--panel:#0d1b2e;--panel2:#13263d;--ink:#eaf2ff;--muted:#8fa9c7;
+  --line:#24415f;--accent:#38bdf8;--accent2:#2563eb;--good:#22c55e;--warn:#f97316;--bad:#ef4444;--purple:#9333ea;--pink:#db2777;
+  --shadow:0 14px 36px rgba(0,0,0,.32);--radius:24px;--nav:rgba(7,17,31,.92);--input:#13263d;
+  --chip-bg:rgba(255,255,255,.04);--active-tab:#13263d;--hero-glow:rgba(56,189,248,.12);
 }
 [data-theme="light"]{
-  --bg:#f5f8fc;--panel:#ffffff;--panel2:#e9f1fb;--ink:#0a1628;--muted:#55708e;
-  --line:#c9d9ea;--accent:#0369a1;--accent2:#0284c7;--shadow:0 10px 24px rgba(16,40,70,.12);
+  --bg:#ffffff;--bg-rgb:255,255,255;--panel:#ffffff;--panel2:#ffffff;--ink:#111827;--muted:#64748b;
+  --line:#d9e2ee;--accent:#2563eb;--accent2:#1d4ed8;--good:#16a34a;--warn:#f97316;--bad:#ef4444;--purple:#9333ea;--pink:#db2777;
+  --shadow:0 16px 38px rgba(15,23,42,.08);--nav:rgba(255,255,255,.94);--input:#ffffff;
+  --chip-bg:#ffffff;--active-tab:#eef5ff;--hero-glow:rgba(37,99,235,.08);
 }
-*{box-sizing:border-box} html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;background:var(--bg);color:var(--ink)}
-body{padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
-.app{max-width:920px;margin:0 auto;padding:14px 14px 92px}.top{position:sticky;top:0;z-index:8;background:linear-gradient(180deg,var(--bg),rgba(7,17,31,.88));backdrop-filter:blur(10px);padding:12px 0 10px}.brand{display:flex;align-items:center;justify-content:space-between;gap:10px}.logo{display:flex;align-items:center;gap:10px}.mark{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--accent),#1e3a8a);box-shadow:var(--shadow);display:grid;place-items:center;font-weight:900}.h1{font-size:1.25rem;font-weight:900;letter-spacing:.2px}.sub{font-size:.76rem;color:var(--muted);margin-top:2px}.btn{border:1px solid var(--line);background:var(--panel2);color:var(--ink);border-radius:14px;padding:10px 12px;font-weight:800;cursor:pointer}.btn:active{transform:scale(.98)}.btn.primary{background:linear-gradient(135deg,var(--accent),#2563eb);border-color:transparent;color:white}.btn.good{background:rgba(52,211,153,.15);border-color:rgba(52,211,153,.45)}.btn.warn{background:rgba(251,191,36,.14);border-color:rgba(251,191,36,.44)}.btn.bad{background:rgba(251,113,133,.14);border-color:rgba(251,113,133,.44)}
-.grid{display:grid;gap:12px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px}.sectionTitle{display:flex;align-items:center;justify-content:space-between;margin:16px 0 9px}.sectionTitle h2{font-size:1rem;margin:0}.muted{color:var(--muted)}.small{font-size:.78rem}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.three{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.tabs{position:fixed;left:0;right:0;bottom:0;z-index:10;background:rgba(7,17,31,.9);backdrop-filter:blur(16px);border-top:1px solid var(--line);padding:8px 8px calc(8px + env(safe-area-inset-bottom));display:flex;justify-content:center}.tabwrap{max-width:920px;width:100%;display:grid;grid-template-columns:repeat(5,1fr);gap:6px}.tab{border:1px solid transparent;background:transparent;color:var(--muted);border-radius:13px;padding:8px 4px;font-weight:800;font-size:.72rem}.tab.active{background:var(--panel2);color:var(--ink);border-color:var(--line)}
-input,select,textarea{width:100%;border:1px solid var(--line);background:var(--panel2);color:var(--ink);border-radius:14px;padding:11px;font:inherit;outline:none} textarea{min-height:92px;resize:vertical}.field label{display:block;color:var(--muted);font-size:.75rem;font-weight:800;margin:0 0 5px 3px}.quick{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.quick .btn{text-align:left;min-height:44px}.card{border:1px solid var(--line);background:linear-gradient(180deg,var(--panel2),var(--panel));border-radius:16px;padding:12px}.card h3{margin:0 0 6px;font-size:.98rem}.pill{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);background:rgba(255,255,255,.04);border-radius:999px;padding:5px 8px;font-size:.72rem;font-weight:800;color:var(--muted)}.metric{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:12px}.metric b{display:block;font-size:1.35rem}.list{display:grid;gap:9px}.hidden{display:none!important}.right{margin-left:auto}.dangerZone{border-color:rgba(251,113,133,.45)}
-.swipeActions{display:flex;gap:8px;margin-top:10px}.status-dot{width:9px;height:9px;border-radius:99px;background:var(--accent);display:inline-block}.status-dot.good{background:var(--good)}.status-dot.warn{background:var(--warn)}.status-dot.bad{background:var(--bad)}
-@media(min-width:760px){.desktop2{display:grid;grid-template-columns:1.1fr .9fr;gap:12px}.quick{grid-template-columns:repeat(4,1fr)}}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+body{padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);transition:background .2s ease,color .2s ease}
+.app{max-width:920px;margin:0 auto;padding:18px 16px 112px;background:radial-gradient(circle at 50% -10%,var(--hero-glow),transparent 36%),var(--bg);min-height:100vh}
+.top{position:sticky;top:0;z-index:8;background:linear-gradient(180deg,var(--bg),rgba(var(--bg-rgb),.88));backdrop-filter:blur(14px);padding:12px 0 16px}
+.brand{display:flex;align-items:center;justify-content:space-between;gap:12px}.logo{display:flex;align-items:center;gap:14px}.mark{width:58px;height:58px;border-radius:20px;background:linear-gradient(135deg,#38bdf8,#2563eb);box-shadow:var(--shadow);display:grid;place-items:center;font-weight:900;font-size:1.6rem;color:white}.h1{font-size:clamp(1.55rem,7vw,2.1rem);font-weight:950;letter-spacing:-.03em;line-height:1}.sub{font-size:1rem;color:var(--muted);margin-top:8px;font-weight:700}.themeBtn{width:54px;height:54px;border-radius:18px;display:grid;place-items:center;font-size:1.2rem}
+.btn{border:1px solid var(--line);background:var(--panel2);color:var(--ink);border-radius:20px;padding:13px 15px;font-weight:850;cursor:pointer;box-shadow:none}.btn:active{transform:scale(.985)}.btn.primary{background:linear-gradient(135deg,#38bdf8,#2563eb);border-color:transparent;color:white;box-shadow:0 10px 24px rgba(37,99,235,.25)}.btn.good{background:rgba(34,197,94,.10);border-color:rgba(34,197,94,.32)}.btn.warn{background:rgba(249,115,22,.10);border-color:rgba(249,115,22,.32)}.btn.bad{background:rgba(239,68,68,.10);border-color:rgba(239,68,68,.32)}
+.grid{display:grid;gap:14px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}.sectionTitle{display:flex;align-items:center;justify-content:space-between;margin:20px 0 12px}.sectionTitle h2{font-size:1.45rem;margin:0;letter-spacing:-.03em}.muted{color:var(--muted)}.small{font-size:.84rem}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}.three{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:10;background:var(--nav);backdrop-filter:blur(18px);border-top:1px solid var(--line);padding:8px 8px calc(8px + env(safe-area-inset-bottom));display:flex;justify-content:center}.tabwrap{max-width:920px;width:100%;display:grid;grid-template-columns:repeat(5,1fr);gap:4px}.tab{border:1px solid transparent;background:transparent;color:var(--muted);border-radius:0;padding:8px 4px 10px;font-weight:800;font-size:.72rem;min-height:58px}.tab .ico{display:block;font-size:1.25rem;line-height:1.1;margin-bottom:2px}.tab.active{background:var(--active-tab);color:var(--accent);border-color:transparent;border-top:4px solid var(--accent);box-shadow:0 0 24px rgba(37,99,235,.06)}
+input,select,textarea{width:100%;border:1px solid var(--line);background:var(--input);color:var(--ink);border-radius:20px;padding:15px;font:inherit;outline:none;box-shadow:none}textarea{min-height:116px;resize:vertical;line-height:1.45}select{appearance:auto}.field label{display:block;color:var(--muted);font-size:.83rem;font-weight:900;margin:0 0 7px 3px}.quick{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.quick .btn{text-align:left;min-height:72px;display:flex;align-items:center;gap:12px;font-size:1rem}.qicon{font-size:1.25rem;width:26px;text-align:center}.blue{color:var(--accent)}.green{color:var(--good)}.orange{color:var(--warn)}.red{color:var(--bad)}.purple{color:var(--purple)}.pink{color:var(--pink)}.cyan{color:#0891b2}
+.card{border:1px solid var(--line);background:linear-gradient(180deg,var(--panel2),var(--panel));border-radius:20px;padding:14px}.card h3{margin:0 0 6px;font-size:1rem}.pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--chip-bg);border-radius:999px;padding:7px 11px;font-size:.78rem;font-weight:900;color:var(--muted)}.metric{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:14px}.metric b{display:block;font-size:1.55rem}.list{display:grid;gap:11px}.hidden{display:none!important}.right{margin-left:auto}.dangerZone{border-color:rgba(239,68,68,.45)}.swipeActions{display:flex;gap:8px;margin-top:10px}.status-dot{width:9px;height:9px;border-radius:99px;background:var(--accent);display:inline-block}.status-dot.good{background:var(--good)}.status-dot.warn{background:var(--warn)}.status-dot.bad{background:var(--bad)}
+@media(min-width:760px){.desktop2{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}.quick{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:430px){.app{padding-left:14px;padding-right:14px}.quick .btn{min-height:64px}.two{gap:10px}.panel{padding:16px}.h1{font-size:1.55rem}.sub{font-size:.9rem}.mark{width:54px;height:54px}.themeBtn{width:50px;height:50px}.sectionTitle h2{font-size:1.35rem}}
 </style>
 
-<meta name="theme-color" content="#07111f" />
+<meta name="theme-color" content="#07111f" id="themeColor" />
 <meta name="description" content="FounderOS Mobile: AI-first startup command center for products, agents, revenue paths, theses, experiments, and daily briefs." />
 <link rel="manifest" href="manifest.json" />
 <link rel="apple-touch-icon" href="icons/icon-192.png" />
@@ -36,23 +45,33 @@ input,select,textarea{width:100%;border:1px solid var(--line);background:var(--p
   <div class="top">
     <div class="brand">
       <div class="logo"><div class="mark">F</div><div><div class="h1">FounderOS Mobile</div><div class="sub">AI-first startup command center · PWA v1.0</div></div></div>
-      <button class="btn" id="themeBtn">☀︎</button>
+      <button class="btn themeBtn" id="themeBtn" aria-label="Toggle light or dark mode">☀︎</button>
     </div>
   </div>
 
   <main id="view"></main>
 </div>
 <nav class="tabs"><div class="tabwrap">
-  <button class="tab active" data-tab="capture">Capture</button>
-  <button class="tab" data-tab="agents">Agents</button>
-  <button class="tab" data-tab="products">Products</button>
-  <button class="tab" data-tab="revenue">Revenue</button>
-  <button class="tab" data-tab="brief">Brief</button>
+  <button class="tab active" data-tab="capture"><span class="ico">✎</span>Capture</button>
+  <button class="tab" data-tab="agents"><span class="ico">♙</span>Agents</button>
+  <button class="tab" data-tab="products"><span class="ico">⬡</span>Products</button>
+  <button class="tab" data-tab="revenue"><span class="ico">▥</span>Revenue</button>
+  <button class="tab" data-tab="brief"><span class="ico">□</span>Brief</button>
 </div></nav>
 <script>
 const KEY='founderos_mobile_v1';
 const nowISO=()=>new Date().toISOString();
 const uid=()=>Math.random().toString(36).slice(2,10)+Date.now().toString(36).slice(-4);
+const quickTypes=[
+  {name:'New idea',icon:'♢',color:'blue'},
+  {name:'App update',icon:'↗',color:'blue'},
+  {name:'Monetization idea',icon:'$',color:'green'},
+  {name:'Marketing idea',icon:'⊳',color:'purple'},
+  {name:'Customer/persona',icon:'♙',color:'orange'},
+  {name:'Bug/fix',icon:'✳',color:'red'},
+  {name:'Agent task',icon:'▣',color:'cyan'},
+  {name:'Narrative reflection',icon:'♡',color:'pink'}
+];
 const starter={
   theme:'dark', active:'capture',
   agents:[
@@ -89,12 +108,12 @@ function byId(arr,id){return arr.find(x=>x.id===id)}
 function setTab(t){db.active=t;save();document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));render();scrollTo(0,0)}
 document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>setTab(b.dataset.tab));
 document.getElementById('themeBtn').onclick=()=>{db.theme=db.theme==='dark'?'light':'dark';save();applyTheme()};
-function applyTheme(){document.getElementById('app').dataset.theme=db.theme;document.getElementById('themeBtn').textContent=db.theme==='dark'?'☀︎':'☾'}
+function applyTheme(){document.documentElement.dataset.theme=db.theme;document.getElementById('app').dataset.theme=db.theme;document.getElementById('themeBtn').textContent=db.theme==='dark'?'☀︎':'☾';let tc=document.getElementById('themeColor'); if(tc) tc.setAttribute('content',db.theme==='dark'?'#07111f':'#ffffff')}
 function optionList(arr, selected){return `<option value="">None</option>`+arr.map(x=>`<option value="${x.id}" ${x.id===selected?'selected':''}>${esc(x.name||x.title)}</option>`).join('')}
 function captureView(){return `<div class="sectionTitle"><h2>Fast Capture</h2><span class="pill">phone-first</span></div>
 <div class="desktop2"><section class="panel">
  <div class="quick">
- ${['New idea','App update','Monetization idea','Marketing idea','Customer/persona','Bug/fix','Agent task','Narrative reflection'].map(x=>`<button class="btn" onclick="quickType('${x}')">${x}</button>`).join('')}
+ ${quickTypes.map(q=>`<button class="btn" onclick="quickType('${q.name}')"><span class="qicon ${q.color}">${q.icon}</span>${q.name}</button>`).join('')}
  </div><br>
  <div class="field"><label>Capture</label><textarea id="entryText" placeholder="Speak or type the thought. Example: AI-first methodology may be the best financial play..."></textarea></div>
  <div class="two"><div class="field"><label>Type</label><select id="entryType"><option>New idea</option><option>App update</option><option>Monetization idea</option><option>Marketing idea</option><option>Customer/persona</option><option>Bug/fix</option><option>Agent task</option><option>Narrative reflection</option></select></div>
