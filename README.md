@@ -1,18 +1,5 @@
-# Foundation OS v2.2
+# FounderOS Mobile PWA v1.2
 
-A mobile-first PWA for tracking four human inputs: Exercise, Fuel, Sleep, and Connect.
+Mobile-first installable PWA with corrected light-mode spacing, viewport-safe cards, app manifest, service worker, localStorage persistence, JSON import/export, and CSV export.
 
-## What's new in v2.2
-- Exercise metric now uses session/sessions wording
-- Entry timestamps display in 24-hour time
-
-## What's new in v2
-- Full UI facelift across all modules
-- Cleaner dashboard-first layout
-- Revised Sleep time boxes
-- Improved bottom navigation
-- Local-only storage
-- JSON export/import
-
-## Deploy
-Upload the full folder contents to GitHub Pages, Netlify, Vercel, or any static host.
+Deploy the folder contents to GitHub Pages or any static host.
