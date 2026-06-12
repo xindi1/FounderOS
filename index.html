@@ -1,153 +1,114 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>FounderOS Mobile PWA v1.2</title>
-<style>
-:root{
-  --bg:#07111f;--bg-rgb:7,17,31;--panel:#0d1b2e;--panel2:#13263d;--ink:#eaf2ff;--muted:#8fa9c7;
-  --line:#24415f;--accent:#38bdf8;--accent2:#2563eb;--good:#22c55e;--warn:#f97316;--bad:#ef4444;--purple:#9333ea;--pink:#db2777;
-  --shadow:0 14px 36px rgba(0,0,0,.32);--radius:24px;--nav:rgba(7,17,31,.92);--input:#13263d;--chip-bg:rgba(255,255,255,.04);--active-tab:#13263d;--hero-glow:rgba(56,189,248,.12);
-}
-[data-theme="light"]{
-  --bg:#ffffff;--bg-rgb:255,255,255;--panel:#ffffff;--panel2:#ffffff;--ink:#0f172a;--muted:#66758a;
-  --line:#dbe4ef;--accent:#2563eb;--accent2:#1d4ed8;--good:#16a34a;--warn:#f97316;--bad:#ef4444;--purple:#9333ea;--pink:#db2777;
-  --shadow:0 14px 34px rgba(15,23,42,.07);--nav:rgba(255,255,255,.96);--input:#ffffff;--chip-bg:#ffffff;--active-tab:#eef5ff;--hero-glow:rgba(37,99,235,.06);
-}
-*{box-sizing:border-box;min-width:0}
-html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}
-body{padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);transition:background .2s ease,color .2s ease}
-.app{width:100%;max-width:560px;margin:0 auto;padding:18px 14px 112px;background:radial-gradient(circle at 50% -10%,var(--hero-glow),transparent 36%),var(--bg);min-height:100vh;overflow-x:hidden}
-.top{padding:8px 0 18px}.brand{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px}.logo{display:contents}.mark{width:54px;height:54px;border-radius:18px;background:linear-gradient(135deg,#38bdf8,#2563eb);box-shadow:var(--shadow);display:grid;place-items:center;font-weight:900;font-size:1.55rem;color:white;flex:0 0 auto}.h1{font-size:clamp(1.65rem,8.4vw,2rem);font-weight:950;letter-spacing:-.045em;line-height:1.02;white-space:nowrap}.sub{font-size:clamp(.86rem,4.2vw,1rem);color:var(--muted);margin-top:6px;font-weight:750;line-height:1.18}.themeBtn{width:50px;height:50px;border-radius:18px;display:grid;place-items:center;font-size:1.2rem;flex:0 0 auto;background:var(--panel)!important}
-.btn{border:1px solid var(--line);background:var(--panel2);color:var(--ink);border-radius:18px;padding:13px 14px;font-weight:850;cursor:pointer;box-shadow:none;max-width:100%;overflow:hidden}.btn:active{transform:scale(.985)}.btn.primary{background:linear-gradient(135deg,#38bdf8,#2563eb);border-color:transparent;color:white;box-shadow:0 10px 24px rgba(37,99,235,.22)}.btn.good{background:rgba(34,197,94,.10);border-color:rgba(34,197,94,.32)}.btn.warn{background:rgba(249,115,22,.10);border-color:rgba(249,115,22,.32)}.btn.bad{background:rgba(239,68,68,.10);border-color:rgba(239,68,68,.32)}
-.grid{display:grid;gap:14px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:18px;width:100%;overflow:hidden}.sectionTitle{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:18px 0 12px}.sectionTitle h2{font-size:1.45rem;margin:0;letter-spacing:-.04em}.muted{color:var(--muted)}.small{font-size:.84rem}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.three{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.tabs{position:fixed;left:0;right:0;bottom:0;z-index:10;background:var(--nav);backdrop-filter:blur(18px);border-top:1px solid var(--line);padding:7px 7px calc(7px + env(safe-area-inset-bottom));display:flex;justify-content:center}.tabwrap{max-width:560px;width:100%;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2px}.tab{border:1px solid transparent;background:transparent;color:var(--muted);border-radius:0;padding:7px 2px 9px;font-weight:800;font-size:.72rem;min-height:58px;overflow:hidden}.tab .ico{display:block;font-size:1.28rem;line-height:1.1;margin-bottom:3px}.tab.active{background:var(--active-tab);color:var(--accent);border-color:transparent;border-top:4px solid var(--accent);box-shadow:0 0 24px rgba(37,99,235,.06)}
-input,select,textarea{width:100%;border:1px solid var(--line);background:var(--input);color:var(--ink);border-radius:18px;padding:14px;font:inherit;outline:none;box-shadow:none}textarea{min-height:104px;resize:vertical;line-height:1.45}select{appearance:auto}.field label{display:block;color:var(--muted);font-size:.83rem;font-weight:900;margin:0 0 7px 3px}.quick{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:100%}.quick .btn{text-align:left;min-height:68px;display:flex;align-items:center;gap:12px;font-size:.95rem;line-height:1.12;white-space:normal}.qicon{font-size:1.55rem;width:30px;text-align:center;line-height:1;flex:0 0 30px}.blue{color:var(--accent)}.green{color:var(--good)}.orange{color:var(--warn)}.red{color:var(--bad)}.purple{color:var(--purple)}.pink{color:var(--pink)}.cyan{color:#0891b2}
-.card{border:1px solid var(--line);background:linear-gradient(180deg,var(--panel2),var(--panel));border-radius:20px;padding:14px;width:100%;overflow:hidden}.card h3{margin:0 0 6px;font-size:1rem}.pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--chip-bg);border-radius:999px;padding:7px 11px;font-size:.78rem;font-weight:900;color:var(--muted);white-space:nowrap}.metric{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:14px}.metric b{display:block;font-size:1.55rem}.list{display:grid;gap:11px}.hidden{display:none!important}.right{margin-left:auto}.dangerZone{border-color:rgba(239,68,68,.45)}.swipeActions{display:flex;gap:8px;margin-top:10px}.status-dot{width:9px;height:9px;border-radius:99px;background:var(--accent);display:inline-block}.status-dot.good{background:var(--good)}.status-dot.warn{background:var(--warn)}.status-dot.bad{background:var(--bad)}
-.desktop2{display:block}.desktop2>section+section{margin-top:14px}
-@media(min-width:900px){.app,.tabwrap{max-width:920px}.desktop2{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}.desktop2>section+section{margin-top:0}.quick{grid-template-columns:repeat(4,minmax(0,1fr))}}
-@media(max-width:390px){.app{padding-left:12px;padding-right:12px}.brand{gap:10px}.mark{width:50px;height:50px}.h1{font-size:1.45rem}.sub{font-size:.82rem}.themeBtn{width:46px;height:46px}.panel{padding:14px}.quick{gap:10px}.quick .btn{min-height:64px;font-size:.88rem;padding:12px 10px;gap:8px}.qicon{width:24px;flex-basis:24px;font-size:1.35rem}.two{gap:10px}.sectionTitle h2{font-size:1.34rem}.tab{font-size:.66rem}}
-</style>
-
-<meta name="theme-color" content="#07111f" id="themeColor" />
-<meta name="description" content="FounderOS Mobile: AI-first startup command center for products, agents, revenue paths, theses, experiments, and daily briefs." />
-<link rel="manifest" href="manifest.json" />
-<link rel="apple-touch-icon" href="icons/icon-192.png" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<meta name="apple-mobile-web-app-title" content="FounderOS" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f7faff" />
+  <title>Foundation OS</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-<div class="app" id="app" data-theme="dark">
-  <div class="top">
-    <div class="brand">
-      <div class="logo"><div class="mark">F</div><div><div class="h1">FounderOS Mobile</div><div class="sub">AI-first startup command center · PWA v1.2</div></div></div>
-      <button class="btn themeBtn" id="themeBtn" aria-label="Toggle light or dark mode">☀︎</button>
-    </div>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Human Inputs Dashboard</p>
+        <h1>Foundation OS</h1>
+      </div>
+      <button id="themeBtn" class="icon-btn" aria-label="Toggle theme">◐</button>
+    </header>
+
+    <main>
+      <section id="dashboard" class="view active" aria-labelledby="dashboardTitle">
+        <p class="eyebrow">Today · <span id="todayDate"></span></p>
+        <section class="hero-card">
+          <h2 id="greeting">Good morning, Rob.</h2>
+          <p class="muted">Here’s how your foundation looks.</p>
+          <div class="summary-list" id="domainCards"></div>
+        </section>
+        <section class="panel">
+          <div class="panel-head"><h3>7-Day Trend</h3><span id="trendLabel" class="mini-badge">Building signal</span></div>
+          <div id="weekBars" class="trend"></div>
+        </section>
+        <section class="panel">
+          <div class="panel-head"><h3>Today’s entries</h3><span id="entryCount" class="muted small">0 entries</span></div>
+          <div id="todayEntries" class="entry-list"></div>
+        </section>
+      </section>
+
+      <section id="exercise" class="view domain-view" data-domain="exercise">
+        <div class="domain-title"><span>Movement</span><h2>Exercise</h2></div>
+        <div class="date-pill"><button type="button">‹</button><span id="exerciseDate">Today</span><button type="button">›</button></div>
+        <section class="card metric-card accent"><div><div class="metric-label">Today</div><div class="metric-value" id="exerciseMetric">0 min</div><p class="muted small" id="exerciseSub">No activity yet</p></div><div class="ring"><span id="exerciseScore">0</span><small>/100</small></div></section>
+        <form class="quick-form" data-domain="exercise">
+          <textarea placeholder="How did you move? Example: 30 min walk, basketball with Dryden, 20 min swim..." required></textarea>
+          <div class="form-row"><input name="minutes" type="number" min="0" step="1" placeholder="Minutes optional" /><input name="kind" placeholder="Type optional: walk, run, strength..." /></div>
+          <button class="primary-btn" type="submit">Save Exercise</button>
+        </form>
+        <h3>Quick Add</h3><div class="chips" data-target="exercise"></div>
+        <h3>Today’s Activities</h3><div class="domain-entries"></div>
+      </section>
+
+      <section id="nutrition" class="view domain-view" data-domain="nutrition">
+        <div class="domain-title"><span>Nutrition</span><h2>Fuel</h2></div>
+        <div class="date-pill"><button type="button">‹</button><span id="nutritionDate">Today</span><button type="button">›</button></div>
+        <section class="card metric-card accent"><div><div class="metric-label">Today</div><div class="metric-value" id="nutritionMetric">0 entries</div><p class="muted small">Track meals without overthinking.</p></div><div class="ring"><span id="nutritionScore">0</span><small>/100</small></div></section>
+        <form class="quick-form" data-domain="nutrition">
+          <textarea placeholder="What did you eat or drink? Example: coffee with cinnamon, ground beef, salad, oatmeal..." required></textarea>
+          <div class="form-row"><input name="tag" placeholder="Tag optional: breakfast, snack..." /></div>
+          <button class="primary-btn" type="submit">Save Food</button>
+        </form>
+        <h3>Quick Add</h3><div class="chips" data-target="nutrition"></div>
+        <h3>Today’s Entries</h3><div class="domain-entries"></div>
+      </section>
+
+      <section id="sleep" class="view domain-view" data-domain="sleep">
+        <div class="domain-title"><span>Recovery</span><h2>Sleep</h2></div>
+        <form class="quick-form sleep-form" data-domain="sleep">
+          <div class="sleep-times">
+            <div class="time-field"><label>Bedtime</label><div class="time-box"><span class="ico">▰</span><input type="time" name="bed"></div></div>
+            <div class="arrow">→</div>
+            <div class="time-field"><label>Wake time</label><div class="time-box"><span class="ico">☼</span><input type="time" name="wake"></div></div>
+          </div>
+          <div class="sleep-total"><div><div class="metric-label">Total sleep</div><strong id="sleepTotal">—</strong></div><span id="sleepBadge" class="mini-badge">Not set</span></div>
+          <div><div class="metric-label" style="margin-bottom:8px">Sleep quality</div><div class="quality" id="qualityBtns"><button type="button">Poor</button><button type="button">Fair</button><button type="button" class="active">Good</button><button type="button">Very Good</button><button type="button">Excellent</button></div></div>
+          <textarea placeholder="Quality, interruptions, nap, dreams..."></textarea>
+          <button type="submit">Save Sleep</button>
+        </form>
+        <h3>Quick tags</h3><div class="chips" data-target="sleep"></div>
+        <div class="domain-entries"></div>
+      </section>
+
+      <section id="connection" class="view domain-view" data-domain="connection">
+        <div class="domain-title"><span>Connection</span><h2>Connect</h2></div>
+        <div class="date-pill"><button type="button">‹</button><span id="connectionDate">Today</span><button type="button">›</button></div>
+        <section class="card metric-card accent"><div><div class="metric-label">Today</div><div class="metric-value">Meaningful time</div><p class="muted small" id="connectionSub">No connection entries yet</p></div><div class="ring"><span id="connectionScore">0</span><small>/100</small></div></section>
+        <form class="quick-form" data-domain="connection">
+          <textarea placeholder="Example: quality talk, walk together, affection, intimacy, family time..." required></textarea>
+          <div class="form-row"><input name="context" placeholder="Optional: person/context" /></div>
+          <button class="primary-btn" type="submit">Save Connection</button>
+        </form>
+        <h3>Quick Add</h3><div class="chips" data-target="connection"></div>
+        <h3>Today’s Entries</h3><div class="domain-entries"></div>
+      </section>
+
+      <section id="settings" class="view">
+        <div class="domain-title"><span style="color:var(--blue)">Control</span><h2>More</h2></div>
+        <section class="panel"><h3>Data</h3><div class="settings-actions"><button id="exportBtn">Export JSON</button><label class="file-btn">Import JSON<input id="importFile" type="file" accept="application/json" hidden /></label><button id="clearBtn" class="danger">Clear All</button></div><p class="muted small">All entries are stored locally on this device.</p></section>
+        <section class="panel"><h3>Product frame</h3><p class="muted">Foundation OS tracks the four human inputs that influence almost everything else: movement, fuel, recovery, and connection.</p></section>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Primary navigation">
+      <button class="nav-btn active" data-view="dashboard">⌂<span>Home</span></button>
+      <button class="nav-btn" data-view="exercise">↔<span>Exercise</span></button>
+      <button class="nav-btn" data-view="nutrition">◒<span>Fuel</span></button>
+      <button class="nav-btn" data-view="sleep">☾<span>Sleep</span></button>
+      <button class="nav-btn" data-view="connection">♡<span>Connect</span></button>
+      <button class="nav-btn" data-view="settings">☰<span>More</span></button>
+    </nav>
   </div>
-
-  <main id="view"></main>
-</div>
-<nav class="tabs"><div class="tabwrap">
-  <button class="tab active" data-tab="capture"><span class="ico">✎</span>Capture</button>
-  <button class="tab" data-tab="agents"><span class="ico">♙</span>Agents</button>
-  <button class="tab" data-tab="products"><span class="ico">⬡</span>Products</button>
-  <button class="tab" data-tab="revenue"><span class="ico">▥</span>Revenue</button>
-  <button class="tab" data-tab="brief"><span class="ico">□</span>Brief</button>
-</div></nav>
-<script>
-const KEY='founderos_mobile_v1';
-const nowISO=()=>new Date().toISOString();
-const uid=()=>Math.random().toString(36).slice(2,10)+Date.now().toString(36).slice(-4);
-const quickTypes=[
-  {name:'New idea',icon:'♧',color:'blue'},
-  {name:'App update',icon:'↗',color:'blue'},
-  {name:'Monetization idea',icon:'$',color:'green'},
-  {name:'Marketing idea',icon:'♩',color:'purple'},
-  {name:'Customer/persona',icon:'♙',color:'orange'},
-  {name:'Bug/fix',icon:'✳',color:'red'},
-  {name:'Agent task',icon:'▣',color:'cyan'},
-  {name:'Narrative reflection',icon:'♡',color:'pink'}
-];
-const starter={
-  theme:'dark', active:'capture',
-  agents:[
-    {id:uid(),name:'CEO Agent',focus:'Portfolio priority, strategic sequencing, weekly decision-making',status:'Active'},
-    {id:uid(),name:'Product Agent',focus:'Specs, feature ranking, app improvements',status:'Active'},
-    {id:uid(),name:'Monetization Agent',focus:'Pricing, SaaS paths, licensing, revenue tests',status:'Active'},
-    {id:uid(),name:'Marketing Agent',focus:'Positioning, content, launch assets, distribution',status:'Active'},
-    {id:uid(),name:'Customer Discovery Agent',focus:'Personas, interviews, outreach lists, pain validation',status:'Queued'},
-    {id:uid(),name:'Engineering Agent',focus:'Implementation plans, bugs, refactors, deployment',status:'Active'},
-    {id:uid(),name:'Narrative Strategy Agent',focus:'Convert reflections into theses, experiments, and operating doctrine',status:'Active'}
-  ],
-  products:[
-    {id:uid(),name:'Executive OS / Life Vitals',category:'Personal Operating System',status:'Flagship candidate',target:'High-agency individuals tracking life systems',monetization:'Subscription / coaching / licensing',next:'Define flagship landing page'},
-    {id:uid(),name:'Communication Meter',category:'Relationship / Executive OS',status:'High-value wedge',target:'Couples, therapists, executives, high-volume communicators',monetization:'Subscription / coaching / clinical-adjacent licensing',next:'Package screenshots + use case story'},
-    {id:uid(),name:'Helio Clock',category:'Time OS',status:'Standalone utility',target:'Sunlight, time, travel, outdoor users',monetization:'Paid store app / premium utility',next:'Polish Microsoft Store listing'},
-    {id:uid(),name:'Trading Tools Suite',category:'Market OS',status:'Niche specialist',target:'Microcap biotech traders',monetization:'Paid templates / pro toolkit / newsletter companion',next:'Bundle tools into one market workflow'}
-  ],
-  revenuePaths:[
-    {id:uid(),name:'Direct SaaS',fit:'Executive OS, Life Vitals, Communication Meter',price:'$5–$20/mo',status:'Evaluate'},
-    {id:uid(),name:'Paid App Store Utility',fit:'Helio Clock, calculators, focused utilities',price:'$4.99–$29.99',status:'Ready'},
-    {id:uid(),name:'Coaching + Software',fit:'Executive OS implementation, personal systems consulting',price:'$500–$5,000 package',status:'Promising'},
-    {id:uid(),name:'Enterprise / Institutional Licensing',fit:'Communication workflows, performance dashboards, student/professional OS',price:'$5k–$50k+',status:'Longer-term'},
-    {id:uid(),name:'White Label',fit:'Universities, creators, consultants, clinics, teams',price:'Project-based',status:'Explore'}
-  ],
-  entries:[], tasks:[], theses:[
-    {id:uid(),title:'AI-first execution may outperform network-first execution',evidence:'Mobile workflow, agent leverage, existing app portfolio, independent production capacity.',counter:'Distribution and trust may still require targeted relationships.',next:'Run one AI-first revenue experiment before leaning on network.',status:'Testing',createdAt:nowISO()}
-  ], experiments:[]
-};
-let db=load();
-function load(){try{return {...starter,...JSON.parse(localStorage.getItem(KEY)||'{}')}}catch(e){return starter}}
-function save(){localStorage.setItem(KEY,JSON.stringify(db));}
-function esc(s=''){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
-function byId(arr,id){return arr.find(x=>x.id===id)}
-function setTab(t){db.active=t;save();document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));render();scrollTo(0,0)}
-document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>setTab(b.dataset.tab));
-document.getElementById('themeBtn').onclick=()=>{db.theme=db.theme==='dark'?'light':'dark';save();applyTheme()};
-function applyTheme(){document.documentElement.dataset.theme=db.theme;document.getElementById('app').dataset.theme=db.theme;document.getElementById('themeBtn').textContent=db.theme==='dark'?'☀︎':'☾';let tc=document.getElementById('themeColor'); if(tc) tc.setAttribute('content',db.theme==='dark'?'#07111f':'#ffffff')}
-function optionList(arr, selected){return `<option value="">None</option>`+arr.map(x=>`<option value="${x.id}" ${x.id===selected?'selected':''}>${esc(x.name||x.title)}</option>`).join('')}
-function captureView(){return `<div class="sectionTitle"><h2>Fast Capture</h2><span class="pill">phone-first</span></div>
-<div class="desktop2"><section class="panel">
- <div class="quick">
- ${quickTypes.map(q=>`<button class="btn" onclick="quickType('${q.name}')"><span class="qicon ${q.color}">${q.icon}</span>${q.name}</button>`).join('')}
- </div><br>
- <div class="field"><label>Capture</label><div style="position:relative"><textarea id="entryText" placeholder="Speak or type the thought. Example: AI-first methodology may be the best financial play..."></textarea><span class="muted" style="position:absolute;right:14px;bottom:16px;font-size:1.25rem">♬</span></div></div>
- <div class="two"><div class="field"><label>Type</label><select id="entryType"><option>New idea</option><option>App update</option><option>Monetization idea</option><option>Marketing idea</option><option>Customer/persona</option><option>Bug/fix</option><option>Agent task</option><option>Narrative reflection</option></select></div>
- <div class="field"><label>Product <span class="muted">(optional)</span></label><select id="entryProduct">${optionList(db.products)}</select></div></div>
- <div class="two"><div class="field"><label>Agent <span class="muted">(optional)</span></label><select id="entryAgent">${optionList(db.agents)}</select></div><div class="field"><label>Convert to</label><select id="entryConvert"><option>Entry only</option><option>Task</option><option>Thesis</option><option>Experiment</option></select></div></div>
- <button class="btn primary" style="width:100%;margin-top:2px" onclick="saveEntry()">▣ &nbsp; Save Capture</button>
-</section><section class="panel"><h2 style="margin-top:0">Recent Captures</h2><div class="list">${db.entries.slice(-5).reverse().map(entryCard).join('')||'<p class="muted">No captures yet.</p>'}</div></section></div>`}
-function entryCard(e){let p=byId(db.products,e.productId), a=byId(db.agents,e.agentId);return `<div class="card"><div class="row"><span class="pill">${esc(e.type)}</span><span class="pill">${new Date(e.createdAt).toLocaleString()}</span></div><p>${esc(e.text)}</p><div class="row small muted">${p?esc(p.name):'No product'} · ${a?esc(a.name):'No agent'}</div></div>`}
-function agentsView(){return `<div class="sectionTitle"><h2>Agent Team</h2><button class="btn" onclick="addAgent()">+ Agent</button></div><div class="list">${db.agents.map(a=>`<div class="card"><div class="row"><h3>${esc(a.name)}</h3><span class="right pill"><span class="status-dot ${a.status==='Active'?'good':'warn'}"></span>${esc(a.status)}</span></div><p class="muted">${esc(a.focus)}</p><div class="swipeActions"><button class="btn" onclick="agentPrompt('${a.id}')">Prompt</button><button class="btn warn" onclick="editAgent('${a.id}')">Edit</button></div></div>`).join('')}</div>`}
-function productsView(){return `<div class="sectionTitle"><h2>Product Portfolio</h2><button class="btn" onclick="addProduct()">+ Product</button></div><div class="list">${db.products.map(p=>`<div class="card"><div class="row"><h3>${esc(p.name)}</h3><span class="right pill">${esc(p.status)}</span></div><p class="muted">${esc(p.category)} · ${esc(p.target)}</p><p><b>Monetization:</b> ${esc(p.monetization)}</p><p><b>Next:</b> ${esc(p.next)}</p><button class="btn warn" onclick="editProduct('${p.id}')">Edit</button></div>`).join('')}</div>`}
-function revenueView(){return `<div class="sectionTitle"><h2>Revenue Paths</h2><button class="btn" onclick="addRevenue()">+ Path</button></div><div class="list">${db.revenuePaths.map(r=>`<div class="card"><div class="row"><h3>${esc(r.name)}</h3><span class="right pill">${esc(r.status)}</span></div><p><b>Fit:</b> ${esc(r.fit)}</p><p><b>Price:</b> ${esc(r.price)}</p></div>`).join('')}</div><div class="sectionTitle"><h2>Theses</h2><button class="btn" onclick="addThesis()">+ Thesis</button></div><div class="list">${db.theses.map(t=>`<div class="card"><div class="row"><h3>${esc(t.title)}</h3><span class="right pill">${esc(t.status)}</span></div><p><b>Evidence:</b> ${esc(t.evidence)}</p><p><b>Counter:</b> ${esc(t.counter)}</p><p><b>Next:</b> ${esc(t.next)}</p></div>`).join('')}</div>`}
-function briefView(){const open=db.tasks.filter(t=>t.status!=='Done');return `<div class="sectionTitle"><h2>Daily Startup Brief</h2><button class="btn primary" onclick="generateBrief()">Generate Brief</button></div><div class="three"><div class="metric"><b>${db.products.length}</b><span class="muted">Products</span></div><div class="metric"><b>${db.entries.length}</b><span class="muted">Captures</span></div><div class="metric"><b>${open.length}</b><span class="muted">Open Tasks</span></div></div><br><div class="panel" id="briefBox">${db.brief?db.brief:'<p class="muted">Tap Generate Brief for today’s priorities.</p>'}</div><br><div class="panel"><h2 style="margin-top:0">Data</h2><div class="row"><button class="btn" onclick="exportJSON()">Export JSON</button><button class="btn" onclick="exportCSV()">Export CSV</button><label class="btn">Import JSON<input type="file" accept="application/json" class="hidden" onchange="importJSON(event)"></label><button class="btn bad" onclick="resetAll()">Reset</button></div></div>`}
-function render(){applyTheme();let v=document.getElementById('view');v.innerHTML=({capture:captureView,agents:agentsView,products:productsView,revenue:revenueView,brief:briefView}[db.active]||captureView)()}
-function quickType(t){document.getElementById('entryType').value=t;document.getElementById('entryText').focus()}
-function saveEntry(){let text=document.getElementById('entryText').value.trim(); if(!text) return alert('Add capture text.'); let e={id:uid(),text,type:document.getElementById('entryType').value,productId:document.getElementById('entryProduct').value,agentId:document.getElementById('entryAgent').value,createdAt:nowISO()}; db.entries.push(e); let c=document.getElementById('entryConvert').value; if(c==='Task')db.tasks.push({id:uid(),title:text.slice(0,90),entryId:e.id,status:'Open',createdAt:nowISO()}); if(c==='Thesis')db.theses.push({id:uid(),title:text.slice(0,110),evidence:'Captured insight needs evidence.',counter:'Identify counter-evidence.',next:'Design a small test.',status:'Testing',createdAt:nowISO()}); if(c==='Experiment')db.experiments.push({id:uid(),title:text.slice(0,110),hypothesis:text,metric:'Revenue / feedback / completion',status:'Planned',createdAt:nowISO()}); save();render();}
-function addAgent(){let name=prompt('Agent name'); if(!name)return; let focus=prompt('Agent focus')||''; db.agents.push({id:uid(),name,focus,status:'Queued'});save();render()}
-function editAgent(id){let a=byId(db.agents,id); a.focus=prompt('Focus',a.focus)||a.focus; a.status=prompt('Status',a.status)||a.status;save();render()}
-function agentPrompt(id){let a=byId(db.agents,id); navigator.clipboard?.writeText(`Act as ${a.name} for FounderOS Mobile. Focus: ${a.focus}. Review the product portfolio, recent captures, theses, and revenue paths. Produce prioritized next actions for the next 24 hours.`); alert('Agent prompt copied to clipboard.');}
-function addProduct(){let name=prompt('Product name'); if(!name)return; db.products.push({id:uid(),name,category:prompt('Category')||'',status:'New',target:prompt('Target user')||'',monetization:prompt('Monetization path')||'',next:prompt('Next action')||''});save();render()}
-function editProduct(id){let p=byId(db.products,id); ['category','status','target','monetization','next'].forEach(k=>p[k]=prompt(k,p[k])||p[k]);save();render()}
-function addRevenue(){let name=prompt('Revenue path'); if(!name)return; db.revenuePaths.push({id:uid(),name,fit:prompt('Fit')||'',price:prompt('Price')||'',status:'Explore'});save();render()}
-function addThesis(){let title=prompt('Thesis'); if(!title)return; db.theses.push({id:uid(),title,evidence:prompt('Evidence')||'',counter:prompt('Counter-evidence')||'',next:prompt('Next experiment')||'',status:'Testing',createdAt:nowISO()});save();render()}
-function generateBrief(){let products=db.products.slice(0,3).map(p=>`<li><b>${esc(p.name)}</b>: ${esc(p.next||'Define next action')}</li>`).join('');let thesis=db.theses[db.theses.length-1];db.brief=`<h3>${new Date().toLocaleDateString()} Brief</h3><p><b>Build today:</b> advance the highest-confidence product wedge.</p><ul>${products}</ul><p><b>Market today:</b> publish one proof-of-use artifact from your actual workflow.</p><p><b>Monetize today:</b> convert one app into a named offer with price, buyer, and next action.</p><p><b>Current thesis:</b> ${esc(thesis?.title||'No thesis yet.')}</p><p><b>Ignore today:</b> broad networking without a defined ask, offer, or experiment.</p>`;save();render()}
-function exportJSON(){download('founderos_mobile_export.json',JSON.stringify(db,null,2),'application/json')}
-function exportCSV(){let rows=[['createdAt','type','text','product','agent']].concat(db.entries.map(e=>[e.createdAt,e.type,e.text,byId(db.products,e.productId)?.name||'',byId(db.agents,e.agentId)?.name||'']));download('founderos_entries.csv',rows.map(r=>r.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\n'),'text/csv')}
-function download(name,data,type){let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([data],{type}));a.download=name;a.click();URL.revokeObjectURL(a.href)}
-function importJSON(ev){let f=ev.target.files[0]; if(!f)return; let r=new FileReader(); r.onload=()=>{try{db=JSON.parse(r.result);save();render()}catch(e){alert('Invalid JSON')}}; r.readAsText(f)}
-function resetAll(){if(confirm('Reset all FounderOS data?')){localStorage.removeItem(KEY);db=starter;save();render()}}
-render();
-
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./service-worker.js').catch(err => console.warn('Service worker registration failed', err));
-  });
-}
-
-</script>
+  <script src="app.js"></script>
 </body>
 </html>
